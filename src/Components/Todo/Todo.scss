@@ -1,0 +1,32 @@
+/* Todo.scss */
+
+/* Header Styles */
+[data-testid="todo-header"] {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form Styles */
+form {
+  margin: 20px 0;
+  
+  label {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+/* Pagination Styles */
+.pagination {
+  margin-top: 20px;
+}
