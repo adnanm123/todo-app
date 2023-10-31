@@ -20,3 +20,5 @@ In this phase, we're refactoring a Todo app developed by another team. The aim i
 - Hide completed tasks.
 - Sort by 'difficulty'.
 - Style with Mantine Component API. Remember, achieving 80% of the design might consume only 20% of the time. Aim to get the design mostly right by the week's end.
+
+![UML](uml.png)
