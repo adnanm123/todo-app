@@ -1,64 +1,99 @@
-import React, { useState, useContext } from 'react';
-import { Button, TextInput, Slider, Text, Pagination } from '@mantine/core';
-import useForm from '../../hooks/form';
+import React, { useEffect, useState, useContext } from 'react';
+import useForm from '../hooks/form';
 import { v4 as uuid } from 'uuid';
-import List from '../../lists/list';  // Importing the List component
-import { SettingsContext } from '../../Context/SettingsContext';
+import List from '../lists/list';
+import { Button, TextInput, Paper, Text, Slider, Grid, Pagination } from '@mantine/core';
 import './Todo.scss';
-
+import { SettingsContext } from '../Context/Settings/SettingsContext';
+import SettingsForm from '../SettingsForm';
 
 const Todo = () => {
-  const settings = useContext(SettingsContext);
+  const [settings] = useContext(SettingsContext);
+  const [defaultValues] = useState({
+    difficulty: 4,
+  });
   const [list, setList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(list.filter(item => !item.complete).length / (settings?.displayItems || 3));
-
-  const defaultValues = settings?.defaultValues || {};
+  const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+
+  // For pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(list.length / settings.itemsToShow);
 
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
-    setList(prevList => [...prevList, item].sort((a, b) => a.difficulty - b.difficulty));
+    setList([...list, item]);
   }
 
-  const startIndex = (currentPage - 1) * (settings?.displayItems || 3);
-  const endIndex = startIndex + (settings?.displayItems || 3);
-  const displayList = list.filter(item => !item.complete).slice(startIndex, endIndex);
+  useEffect(() => {
+    let incompleteCount = list.filter(item => !item.complete).length;
+    setIncomplete(incompleteCount);
+    document.title = `To Do List: ${incomplete}`;
+  }, [list]);
+
+  // Assuming sort by item text, change accordingly
+  const sortedList = [...list].sort((a, b) => a.text.localeCompare(b.text));
+
+  const displayedTodos = sortedList.slice(
+    (currentPage - 1) * settings.itemsToShow,
+    currentPage * settings.itemsToShow
+  );
 
   return (
-    <>
-      <header data-testid="todo-header">
-        <Text align="center" size="xl">To Do List: {displayList.length} items pending</Text>
-      </header>
+    <Grid>
+      <Grid.Col span={6}>
+        <div className="todo-app">
+          <Paper padding="md" className="todo-header" data-testid="todo-header">
+            <Text align="center" size="xl">
+              To Do List: {incomplete} items pending
+            </Text>
+          </Paper>
 
-      <form onSubmit={handleSubmit}>
-        <Text align="center" size="lg">Add To Do Item</Text>
-        <label>
-          <span>To Do Item</span>
-          <TextInput onChange={handleChange} name="text" placeholder="Item Details" />
-        </label>
-        <label>
-          <span>Assigned To</span>
-          <TextInput onChange={handleChange} name="assignee" placeholder="Assignee Name" />
-        </label>
-        <label>
-          <span>Difficulty</span>
-          <Slider onChange={handleChange} defaultValue={defaultValues?.difficulty || 3} min={1} max={5} name="difficulty" />
-        </label>
-        <label>
-          <Button type="submit">Add Item</Button>
-        </label>
-      </form>
+          <div>
+            <h2>Current Settings:</h2>
+            <ul>
+              <li>Show Completed ToDos: {settings.hideCompleted ? 'Yes' : 'No'}</li>
+              <li>Items per page: {settings.itemsToShow}</li>
+            </ul>
+          </div>
 
-      <List tasks={displayList} />
-      <Pagination
-          total={totalPages}
-          current={currentPage}
-          onChange={setCurrentPage}
-          size="sm"
-      />
-    </>
+          <form onSubmit={handleSubmit}>
+            <Paper padding="md" className="todo-form">
+              <Text size="lg">Add To Do Item</Text>
+
+              <div className="input-group">
+                <TextInput label="To Do Item" placeholder="Item Details" onChange={handleChange} name="text" />
+              </div>
+
+              <div className="input-group">
+                <TextInput label="Assigned To" placeholder="Assignee Name" onChange={handleChange} name="assignee" />
+              </div>
+
+              <div className="input-group">
+                <Text>Difficulty</Text>
+                <Slider onChange={handleChange} defaultValue={defaultValues.difficulty} min={1} max={5} name="difficulty" />
+              </div>
+
+              <Button type="submit" fullWidth>
+                Add Item
+              </Button>
+            </Paper>
+          </form>
+
+          <SettingsForm />
+          <Pagination 
+            page={currentPage} 
+            total={totalPages} 
+            onPageChange={(event) => setCurrentPage(event.value)} 
+          />
+        </div>
+      </Grid.Col>
+
+      <Grid.Col span={6}>
+        <List list={displayedTodos} setList={setList} />
+      </Grid.Col>
+    </Grid>
   );
 };
 
