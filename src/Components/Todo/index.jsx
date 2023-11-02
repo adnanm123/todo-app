@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import useForm from '../hooks/form';
+import useForm from '../../hooks/form';
 import { v4 as uuid } from 'uuid';
 import List from '../lists/list';
-import { Button, TextInput, Paper, Text, Slider, Grid, Pagination } from '@mantine/core';
+import { Button, TextInput, Paper, Text, Slider, Grid } from '@mantine/core';
 import './Todo.scss';
-import { SettingsContext } from '../Context/Settings/SettingsContext';
+import { SettingsContext } from '../../Context/Settings/SettingsContext';
 import SettingsForm from '../SettingsForm';
+// import Auth from '../Auth/auth';
 
 const Todo = () => {
   const [settings] = useContext(SettingsContext);
@@ -15,10 +16,6 @@ const Todo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
-
-  // For pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(list.length / settings.itemsToShow);
 
   function addItem(item) {
     item.id = uuid();
@@ -32,16 +29,8 @@ const Todo = () => {
     document.title = `To Do List: ${incomplete}`;
   }, [list]);
 
-  // Assuming sort by item text, change accordingly
-  const sortedList = [...list].sort((a, b) => a.text.localeCompare(b.text));
-
-  const displayedTodos = sortedList.slice(
-    (currentPage - 1) * settings.itemsToShow,
-    currentPage * settings.itemsToShow
-  );
-
   return (
-    <Grid>
+    <Grid >
       <Grid.Col span={6}>
         <div className="todo-app">
           <Paper padding="md" className="todo-header" data-testid="todo-header">
@@ -57,7 +46,7 @@ const Todo = () => {
               <li>Items per page: {settings.itemsToShow}</li>
             </ul>
           </div>
-
+          {/* <Auth capability="create"> */}
           <form onSubmit={handleSubmit}>
             <Paper padding="md" className="todo-form">
               <Text size="lg">Add To Do Item</Text>
@@ -80,18 +69,13 @@ const Todo = () => {
               </Button>
             </Paper>
           </form>
-
-          <SettingsForm />
-          <Pagination 
-            page={currentPage} 
-            total={totalPages} 
-            onPageChange={(event) => setCurrentPage(event.value)} 
-          />
+          {/* </Auth> */}
         </div>
+        <SettingsForm />
       </Grid.Col>
 
       <Grid.Col span={6}>
-        <List list={displayedTodos} setList={setList} />
+        <List list={list} setList={setList} />
       </Grid.Col>
     </Grid>
   );

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { SettingsContext } from '../Context/Settings/SettingsContext';
+import { SettingsContext } from '../../Context/Settings/SettingsContext';
 import { Pagination, Paper, Button } from '@mantine/core';
 import './list.scss';
 

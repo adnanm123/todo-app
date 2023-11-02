@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { SettingsContext } from '../Context/Settings/SettingsContext';
-import { Container, Text, Paper, Input, Checkbox, Button, Select } from '@mantine/core';
+import { SettingsContext } from '../../Context/Settings/SettingsContext';
+import { Container, Text, Paper, Input, Checkbox, Button } from '@mantine/core';
 
 function SettingsForm() {
   const [settings, setSettings] = useContext(SettingsContext);
@@ -23,22 +23,43 @@ function SettingsForm() {
   };
 
   return (
-    <Container align="left" size={1200}>
-      <Paper style={{ width: '50%', marginRight: '20px' }}>
-        {/* ... (existing form code) */}
-        <Text align="left">Default Sort Field:</Text>
-        <Select
-          data={['name', 'date', 'priority']}
-          value={formValues.sortField}
-          onChange={(value) => setFormValues((prev) => ({ ...prev, sortField: value }))}
+    <Container align="left" size={600}>
+    <Paper>
+      <Text align="left" size="xl">Update Settings:</Text>
+      <form onSubmit={handleSubmit}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px',  marginTop: '15px', }}>
+        <Checkbox 
+          label="Show Completed ToDos:"
+          name="hideCompleted"
+          checked={formValues.hideCompleted}
+          onChange={(e) => handleInputChange({
+            target: {
+              name: e.currentTarget.name,
+              type: 'checkbox',
+              checked: e.currentTarget.checked
+            }
+          })}
         />
-      </Paper>
-      <Paper style={{ width: 'calc(50% - 20px)' }}>
-        <Text align="left" size="xl">Current Settings:</Text>
-        <Text>Show Completed ToDos: {formValues.hideCompleted ? "Yes" : "No"}</Text>
-        <Text>Items per page: {formValues.itemsToShow}</Text>
-        <Text>Sort by: {formValues.sortField}</Text>
-      </Paper>
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+        <Text align="left">Items per page:</Text>
+        <Input 
+          type="number"
+          label="Items per page:"
+          name="itemsToShow"
+          value={String(formValues.itemsToShow)}
+          onChange={(e) => handleInputChange({
+            target: {
+              name: e.currentTarget.name,
+              type: 'number',
+              value: e.currentTarget.value
+            }
+          })}
+        />
+        </div>
+        <Button type="submit">Save</Button>
+      </form>
+    </Paper>
     </Container>
   );
 }
