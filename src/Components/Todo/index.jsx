@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import useForm from '../../hooks/form';
+import useForm from '../';
 import { v4 as uuid } from 'uuid';
 import List from '../lists/list';
 import { Button, TextInput, Paper, Text, Slider, Grid } from '@mantine/core';
