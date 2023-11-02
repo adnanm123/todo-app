@@ -1,46 +1,46 @@
-.settings-form-container {
-    padding: 20px;
-    background-color: #f8f8f8;
-    max-width: 900px; // adjust as needed
-    margin-left: 21rem;
+// .settings-form-container {
+//     padding: 20px;
+//     background-color: #f8f8f8;
+//     max-width: 900px; // adjust as needed
+//     margin-left: 21rem;
 
-    header {
-        display: flex;
-        justify-content: l;
-        margin-bottom: 20px;
-        background-color: darkslategray;
+//     header {
+//         display: flex;
+//         justify-content: l;
+//         margin-bottom: 20px;
+//         background-color: darkslategray;
 
-        h2 {
-            font-size: 24px;
-            text-align: center;
-        }
-    }
+//         h2 {
+//             font-size: 24px;
+//             text-align: center;
+//         }
+//     }
 
-    .settings-content {
-        display: flex;
-        gap: 20px;
+//     .settings-content {
+//         display: flex;
+//         gap: 20px;
 
-        .update-settings, .updated-settings {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//         .update-settings, .updated-settings {
+//             background-color: #fff;
+//             padding: 20px;
+//             border: 1px solid #ddd;
+//             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             
-            h3 {
-                font-size: 18px;
-                margin-bottom: 20px;
-            }
+//             h3 {
+//                 font-size: 18px;
+//                 margin-bottom: 20px;
+//             }
 
-            label {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 15px;
+//             label {
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: space-between;
+//                 margin-bottom: 15px;
 
-                input[type="checkbox"] {
-                    margin-right: 10px;
-                }
-            }
-        }
-    }
-}
+//                 input[type="checkbox"] {
+//                     margin-right: 10px;
+//                 }
+//             }
+//         }
+//     }
+// }

@@ -1,83 +1,31 @@
-/* Overall Page Styles */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
-}
+// App.scss
 
-/* Header Styles */
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Form Styles */
-form {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form h2 {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
-form label {
-  display: block;
-  margin-bottom: 15px;
-}
-
-form label span {
-  display: block;
-  margin-bottom: 5px;
-}
-
-form button {
-  background-color: #007BFF;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-form button:hover {
-  background-color: #0056b3;
-}
-
-/* Tasks Styles */
-div[key] {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 10px 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-div[key] hr {
-  margin: 10px 0;
-  border: none;
-  border-top: 1px solid #ddd;
-}
-
-div[key] p {
-  margin: 0 0 10px;
-}
-
-div[key] p:last-child {
-  margin-bottom: 0;
-}
-
-div[key] p small {
-  color: #888;
-}
-
-/* Pagination Styles */
-/* You may not need to style this if the Mantine library already provides styling. If needed, you can add styles here. */
+.app-container {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 100%;
+    min-height: 100vh; // ensure it covers the full viewport height
+    
+    .header,
+    .login {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+  
+    .routes-container {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    }
+  
+    .settings-form {
+      margin-top: 2rem;
+    }
+  }
+  
