@@ -59,3 +59,39 @@ In Phase 3, we'd like to extend the functionality of the application by requirin
 - As a user, I want to ensure that only fellow users who are allowed to "create," based on their user type, can add new To-Do Items.
 - As a user, I want to ensure that only fellow users who are allowed to "update," based on their user type, can mark To-Do Items complete.
 - As a user, I want to ensure that only fellow users who are allowed to "delete," based on their user type, can delete new To-Do Items.
+
+In Phase 4, we're taking the To Do List Manager to the next level by integrating with a live authentication server for user logins, and connecting to a database for storing to-do items through a deployed API. This ensures real-time data persistence and secure access to user-specific tasks.
+
+## To Do List Manager Phase 4: API Integration
+
+### Overview
+
+Phase 4 connects the To Do List Manager with a live API for authentication and database interactions. Users will experience a seamless flow from login to managing their to-do items.
+
+### Requirements
+
+- Integrate live authentication for user login.
+- Perform CRUD operations via a live API.
+- Handle state updates after each data operation.
+- Securely store and manage authentication tokens.
+
+### API Endpoints
+
+- `GET /todo` - List all to-do items.
+- `POST /todo` - Add a new item.
+- `PUT /todo` - Update an item.
+- `DELETE /todo/:id` - Remove an item.
+
+### Authentication
+
+- `/signup` - New user registration.
+- `/signin` - User login.
+- Bearer Token - Authorization and access control.
+
+### Instructions
+
+- Run the application with `npm start`.
+- Login to see and manage your to-do items.
+
+...(remaining content)...
+This simplification retains the essential information for Phase 4, including a high-level overview, a succinct list of requirements, API endpoints, authentication details, and basic run instructions.
